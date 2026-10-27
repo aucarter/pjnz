@@ -210,6 +210,37 @@ get_pars_metadata <- function(dim_vars) {
         )
       )
     ),
+    regional_adjust_pop_state = list(
+      allow_null = TRUE,
+      type = "int",
+      read = list(
+        list(tag = "RegionalAdjustPopCBState MV")
+      )
+    ),
+    regional_adjust_pop = list(
+      allow_null = TRUE,
+      type = "real",
+      read = list(
+        list(
+          tag = "RegionalAdjustPopData MV2",
+          dims = list("a", "s", "years"),
+          start_offset = list(row = 1),
+          skip = list(
+            rows = list(
+              length(dim_vars$a) + 1,
+              length(dim_vars$a) * 2 + 2
+            )
+          )
+        )
+      )
+    ),
+    custom_pop_stop_rescaling_year = list(
+      allow_null = TRUE,
+      type = "int",
+      read = list(
+        list(tag = "CustomPopStopRescalingYear MV")
+      )
+    ),
     surv_rate = list(
       type = "real",
       read = list(

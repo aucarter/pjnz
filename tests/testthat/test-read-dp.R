@@ -200,3 +200,13 @@ test_that("can read ART initiation rate", {
   expect_equal(dp$data$art_initiation_rate$data[, "1996"], c(0.4, 0.1), ignore_attr = TRUE)
   expect_equal(dp$data$art_coverage_selection$data, 5)
 })
+
+test_that("can read regional population adjustment settings", {
+  pjnz <- system_file(
+    "pjnz", "bwa_aim-adult-art-no-special-elig_v6.13_2022-04-18.PJNZ")
+  dat <- read_dp(pjnz)
+  expect_equal(dat$data$regional_adjust_pop_state$data, 0L)
+  expect_equal(dat$data$custom_pop_stop_rescaling_year$data, 2030L)
+  expect_equal(dimnames(dat$data$regional_adjust_pop$data),
+               list(dat$dim_vars$a, dat$dim_vars$s, dat$dim_vars$years))
+})
